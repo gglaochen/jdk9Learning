@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
  */
 public class BootStrap {
     private static void demoSubscribe(DockerXDemoPublisher<Integer> publisher, String subscriberName) {
-        DockerXDemoSubscriber<Integer> subscriber = new DockerXDemoSubscriber<>(4L, subscriberName);
+        DockerXDemoSubscriber<Integer> subscriber = new DockerXDemoSubscriber<>(3L, subscriberName);
         publisher.subscribe(subscriber);
     }
 

@@ -19,14 +19,16 @@ public class DockerXDemoSubscriber<T> implements Flow.Subscriber<T> {
     }
 
     /**
-     * 在给定的 Subscription 想要使用 Subscriber 其他方法的前提下，必须先调这个方法
+     * 在Publisher::subscribe中的第一个步骤
+     * 执行的逻辑
+     * 1. 调用对应subscription的request方法获取n个元素
      */
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
-        // 在消费一般的时候重新请求
+        // 在消费一半的时候重新请求
         //count = bufferSize - bufferSize / 2;
-        (this.subscription = subscription).request(bufferSize);
         System.out.println("开始 onSubscribe 订阅");
+        (this.subscription = subscription).request(bufferSize);
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -36,6 +38,7 @@ public class DockerXDemoSubscriber<T> implements Flow.Subscriber<T> {
 
     /**
      * 获取 Subscription 的下一个元素
+     * 在
      */
     @Override
     public void onNext(T item) {

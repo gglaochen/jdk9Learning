@@ -36,9 +36,14 @@ public class DockerXDemoPublisher<T> implements Flow.Publisher<T>, AutoCloseable
         });
     }
 
+    /**
+     * 订阅方法
+     */
     @Override
     public void subscribe(Flow.Subscriber<? super T> subscriber) {
+        // 1.订阅后会执行->subscription的request方法->subscriber的onNext方法
         subscriber.onSubscribe(new DockerXDemoSubscription<>(subscriber, executor));
+        // 2.添加到 发布者维护的Subscription列表中(发布数据 和 cancel的时候需要用到)
         list.add(new DockerXDemoSubscription<>(subscriber, executor));
     }
 
@@ -48,6 +53,7 @@ public class DockerXDemoPublisher<T> implements Flow.Publisher<T>, AutoCloseable
     static class DockerXDemoSubscription<T> implements Flow.Subscription {
         private final Flow.Subscriber<? super T> subscriber;
         private final ExecutorService executor;
+        //维护future主要是为了执行Subscription::cancel的时候可以直接终止正在进行的任务
         private Future<?> future;
         private T item;
         private boolean completed;
@@ -58,7 +64,7 @@ public class DockerXDemoPublisher<T> implements Flow.Publisher<T>, AutoCloseable
         }
 
         /**
-         * 添加元素
+         * 获取n个元素
          */
         @Override
         public void request(long n) {
