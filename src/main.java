@@ -13,8 +13,12 @@ public class main {
         a.add("1");
         Set<Integer> sets = Set.of(1, 2, 3);
         List<String> lists = Optional.ofNullable(sets).stream().map(String::valueOf).collect(Collectors.toList());
-
         System.out.println(lists);
+
+        Integer sum1 = sets.parallelStream().reduce(Integer::sum).get();
+        Integer sum2 = sets.parallelStream().reduce(0, Integer::sum);
+        System.out.println("sum1" + sum1);
+        System.out.println("sum2" + sum2);
     }
 }
 

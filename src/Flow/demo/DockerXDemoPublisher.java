@@ -21,18 +21,14 @@ public class DockerXDemoPublisher<T> implements Flow.Publisher<T>, AutoCloseable
     public void submit(T item) {
         System.out.println("****** 开始发布元素 item：" + item + "*********");
         list.forEach(x -> {
-            x.future = executor.submit(() -> {
-                x.subscriber.onNext(item);
-            });
+            x.future = executor.submit(() -> x.subscriber.onNext(item));
         });
     }
 
     @Override
     public void close() throws Exception {
         list.forEach(e -> {
-            e.future = executor.submit(() -> {
-                e.subscriber.onComplete();
-            });
+            e.future = executor.submit(() -> e.subscriber.onComplete());
         });
     }
 
