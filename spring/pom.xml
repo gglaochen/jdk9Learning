@@ -19,6 +19,13 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -41,6 +48,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -48,14 +56,18 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>9</source>
-                    <target>9</target>
-                </configuration>
+                <version>2.0.6.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <!--<configuration>
+                    &lt;!&ndash;fork:如果没有该项配置,整个devtools不会起作用&ndash;&gt;
+                    <fork>true</fork>
+                </configuration>-->
             </plugin>
         </plugins>
     </build>
