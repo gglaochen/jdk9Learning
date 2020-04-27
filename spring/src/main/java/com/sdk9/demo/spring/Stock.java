@@ -1,4 +1,4 @@
-package com.sdk9.demo.spring.handler;
+package com.sdk9.demo.spring;
 
 import com.sdk9.demo.spring.entity.Product;
 import com.sdk9.demo.spring.entity.SocketItem;
@@ -10,10 +10,10 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author ChenHanLin 2020/4/23
  */
-@Component
+
 public class Stock {
 
-    private final Map<Product, SocketItem> stockItemMap = new ConcurrentHashMap<>();
+    private static final Map<Product, SocketItem> stockItemMap = new ConcurrentHashMap<>();
 
     private SocketItem getItem(Product product){
         stockItemMap.putIfAbsent(product,new SocketItem());

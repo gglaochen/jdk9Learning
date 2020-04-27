@@ -1,13 +1,14 @@
 package com.sdk9.demo.spring.flow;
 
-import com.sdk9.demo.spring.entity.Order;
 import com.sdk9.demo.spring.Stock;
+import com.sdk9.demo.spring.entity.Order;
 import com.sdk9.demo.spring.utils.SpringBeanLoader;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Flow;
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.SubmissionPublisher;
 
 /**
  * 订阅者
@@ -15,11 +16,12 @@ import java.util.concurrent.ForkJoinPool;
  * @author ChenHanLin 2020/4/23
  */
 @Slf4j
-public class StockSubscriber implements Flow.Subscriber<Order> {
+public class StockProcessor extends SubmissionPublisher<Order>
+        implements Flow.Processor<Order, Order> {
 
     private Stock stock;
 
-    public StockSubscriber() {
+    public StockProcessor() {
         this.stock = new Stock();
     }
 

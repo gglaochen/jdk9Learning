@@ -4,7 +4,7 @@ import com.sdk9.demo.spring.ApplicationTests;
 import com.sdk9.demo.spring.entity.Item;
 import com.sdk9.demo.spring.entity.Order;
 import com.sdk9.demo.spring.entity.Product;
-import com.sdk9.demo.spring.handler.Stock;
+import com.sdk9.demo.spring.Stock;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +21,9 @@ public class FlowTests extends ApplicationTests {
 
 
     private static void demoSubscribe(SubmissionPublisher<Order> publisher, String subscriberName) {
-        StockSubscriber subscriber = new StockSubscriber();
-        publisher.subscribe(subscriber);
+        StockProcessor processor = new StockProcessor();
+        publisher.subscribe(processor);
+        processor.subscribe(new StockSubscriber());
     }
 
     @Test
@@ -39,6 +40,8 @@ public class FlowTests extends ApplicationTests {
     private void publish(SubmissionPublisher<Order> p) {
         Stock stock = new Stock();
         Product product = new Product();
+        product.setProductId("1");
+        product.setProductName("测试产品");
         //给产品存40库存
         stock.store(product, 40);
         //一个订单项买10库存
