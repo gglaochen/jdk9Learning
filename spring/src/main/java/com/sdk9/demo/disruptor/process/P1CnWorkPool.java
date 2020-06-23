@@ -1,4 +1,4 @@
-package com.sdk9.demo.disruptor.consumer;
+package com.sdk9.demo.disruptor.process;
 
 import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.RingBuffer;
