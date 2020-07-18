@@ -27,6 +27,13 @@
             <version>2.15</version>
         </dependency>
 
+        <!--Hazelcast-->
+        <dependency>
+            <groupId>com.hazelcast.jet</groupId>
+            <artifactId>hazelcast-jet</artifactId>
+            <version>4.0</version>
+        </dependency>
+
         <dependency>
             <groupId>com.carrotsearch</groupId>
             <artifactId>java-sizeof</artifactId>
@@ -65,6 +72,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>

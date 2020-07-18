@@ -4,3 +4,15 @@ spring:
     url: http://192.168.214.60:8086
     user: root
     database: test
+hazelcast:
+  self-setting: false #如果该配置为false使用内网自动发现
+  #多种网络环境均开启只会启用第一个
+  #主动发现配置
+  tcp-ip:
+    enable: false
+    interface-ex: 172.16.10.*
+    members:
+      - 172.16.10.98
+  kubernetes:  #k8s部署环境网络发现
+    enable: false
+    service-dns: power-match.dev.svc.cluster.local
